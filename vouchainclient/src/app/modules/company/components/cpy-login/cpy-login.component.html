@@ -1,0 +1,86 @@
+<section id="cpy-login-section">
+
+  <!-- Website Border Images -->
+  <img class="img-fluid" id="cpy-login-top-image" src="./assets/images/vouchain_loginTop.png"/>
+  <img class="img-fluid" id="cpy-login-bottom-image" src="./assets/images/vouchain_loginBottom.png"/>
+
+<div class="container-fluid" >
+  <div class="row">
+    <div id="col1-1">
+
+      <!-- VouChain Title Header -->
+  <div id="cpy-login-header">
+    <a href="{{ homepage }}">
+      <img id="imgCpyLogoLogin" class="img-fluid" src="./assets/images/cpyNavbar_logoBianco.png" />
+    </a>
+  </div>
+    </div>
+  </div>
+
+    <div id="col1-2"></div>
+    <div id="col1-3"></div>
+  </div>
+
+          <!-- Main Website Content -->
+  <div class="cpy-login-container table-responsive">
+    
+<div class="cpy-login-wrap table-responsive">
+    
+
+
+      <!-- Login Form -->
+      <form class="text-center" (ngSubmit)="onSubmitLoginForm()">
+
+        <!-- Login | Signup Links -->
+        <div style="margin-bottom: 2rem;">
+          <a id="cpy-login-anchor-login">{{ "LOGIN.LOGIN_LABEL" | translate }}</a>
+          <span id="cpy-login-anchor-pipe"> | </span>
+          <a id="cpy-login-anchor-signup" routerLink="/company/cpySignup">{{ "LOGIN.SIGN_UP_LINK" | translate }}</a>
+        </div>
+
+        <!-- Email Input -->
+        <div class="form-group">
+          <input class="form-control" data-toggle="tooltip" data-placement="top" name="email" placeholder="Email" title="{{ 'SIGNUP.TOOLTIPS.EMAIL' | translate }}" type="email" (input)="checkEmail()" [(ngModel)]="email" required/>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-group">
+          <input class="form-control" data-toggle="tooltip" data-placement="top" name="password" placeholder="Password" title="{{ 'SIGNUP.TOOLTIPS.PASSWORD_REQUIRED' | translate }}" type="password" (input)="checkPassword()" [(ngModel)]="password" required/>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-block btn-primary" type="submit">
+          {{ "LOGIN.LOGIN_LABEL" | translate }}
+        </button>
+
+        <!-- Password Recovery Link -->
+        <p class="mt-2 mb-0">
+          {{ "LOGIN.FORGOT_YOUR" | translate }} <a routerLink="/usrForgotPass" [queryParams]="{ profile_code: 'company' }">Password</a>?
+        </p>
+
+        <!-- Signup New Account Link -->
+        <p class="mb-0">
+          {{ "LOGIN.CREATE_NEW" | translate }} <a routerLink="/company/cpySignup">Account</a>?
+        </p>
+
+        <!-- Go To Homepage Link -->
+         <div class="btn btn-block">
+        <p>Torna alla <a href="{{ homepage }}">Homepage</a>.</p>
+         </div>
+
+        <!-- Errors Alerts -->
+        <div class="alert alert-danger" id="cpy-login-error-description" role="alert" *ngIf="loginFail">
+          {{ "ERRORS.INCORRECT_EMAIL_OR_PASSWORD" | translate }}
+        </div>
+        <div class="alert alert-danger" id="cpy-login-error-description-generic" role="alert" *ngIf="errorGeneric">
+          {{ "ERRORS.GENERIC" | translate }}
+        </div>
+
+      </form>
+
+  </div>
+
+ </div>
+
+
+</section>

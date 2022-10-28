@@ -1,0 +1,174 @@
+#cpy-navbar {
+  /* background-color: transparent; */
+  background-color: #2c61f1;
+  color: white;
+  height: 7.2vh;
+  font-size: 1.3vw;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
+#cpy-navbar-profile {
+  font-size: 1.3vw;
+}
+
+#cpy-brand {
+  font-size: 1.7rem;
+  display: inline;
+}
+
+#imgCpyLogo {
+  width: 60%;
+}
+
+#imgCpyProfile {
+  width: 20%;
+}
+
+.cpy-dropdown-item {
+  color: #2d2e83 !important;
+}
+
+.cpy-dropdown-item:hover {
+  background-color: #2c61f1 !important;
+}
+
+.navbar a {
+  color: white;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #2d2e83;
+}
+
+.active-link {
+  border-bottom: 3px solid white;
+  border-radius: 5px 0px;
+  box-shadow: 0px 1px #000000;
+  color: #ffffff !important;
+  padding-bottom: 0px;
+  text-shadow: 1px 1px #000000;
+}
+
+@media screen and (max-width: 768px) {
+  #cpy-navbar {
+    background-color: #2d2e83;
+    font-size: 1rem;
+    height: unset;
+    padding: 1rem 0;
+  }
+
+  #cpy-navbar-profile {
+    font-size: 1rem;
+  }
+
+  #cpy-brand {
+    font-size: 1.3rem;
+    margin: 0;
+    display: inline;
+  }
+
+  #navbarSupportedContent {
+    background-color: #2d2e83;
+  }
+
+  .dropdown-menu {
+    background-color: #2d2e83;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    margin-bottom: 0.5rem;
+  }
+
+  .cpy-dropdown-item {
+    color: #ffffff !important;
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .navbar {
+    padding: unset;
+  }
+
+  .navbar a {
+   margin-right: 0.3rem;
+  }
+
+  #imgCpyLogo {
+    width: 55%;
+  }
+
+  .active-link {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  #cpy-navbar {
+    font-size: 1.4vw;
+  }
+
+  #imgCpyProfile {
+    width: 30%;
+  }
+
+  #imgCpyLogo {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+  #cpy-navbar {
+    background-color: #2d2e83;
+    font-size: 1.3rem;
+    height: unset;
+    padding: 1rem 0;
+  }
+
+  #cpy-brand {
+    font-size: 1.7rem;
+    margin-right: -5rem;
+  }
+
+  #imgCpyLogo {
+    width: 40%;
+  }
+
+  #imgCpyProfile {
+    width: 30%;
+  }
+
+  #navbarSupportedContent {
+    background-color: #2d2e83;
+  }
+
+  .dropdown-menu {
+    background-color: #2d2e83;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    margin-bottom: 0.5rem;
+  }
+
+  .cpy-dropdown-item {
+    color: #ffffff !important;
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .navbar {
+    padding: unset;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #imgCpyLogo {
+    width: 80%;
+  }
+
+  #cpy-navbar-display {
+    display: flex;
+  }
+}

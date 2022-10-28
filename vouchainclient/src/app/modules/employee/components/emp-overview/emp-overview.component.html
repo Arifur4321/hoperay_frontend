@@ -1,0 +1,182 @@
+<section id="emp-dashboard-header">
+    <img src="./assets/images/vouchain_dashboard_top_prova04.png" id="top-image-dashboard"
+        class="img-fluid float-right" />
+</section>
+<section id="emp-overview">
+    <!-- Title -->
+    <h1 class="text-center  text-white" id="emp-overview-title"><b>{{ 'OVERVIEW.EVIDENCE' | translate }}</b></h1>
+    <div class="container">
+        <div class="row">
+            <!-- Prima colonna profilo -->
+            <div class="col-xl-4 p-3">
+                <div class="row h-100">
+                    <div id="emp-ow-wrap-profile" class="content-wrap my-auto text-center">
+                        <div class="row justify-content-end" id="emp-ow-profile-go-btn">
+                            <a routerLink="/employee/empDashboard/modifyProfile"><img
+                                    src="./assets/images/icons/profilo_go_icon.png"></a>
+                        </div>
+                        <div class="row">
+                            <img src="./assets/images/icons/profilo_icon2.png" class="img-fluid mx-auto">
+                        </div>
+                        <div class="emp-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.FIRST_NAME' | translate }}</div>
+                        <div class="emp-ow-profile-text-subtitle">{{this.empDto.empFirstName}}</div>
+
+                        <div class="emp-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.LAST_NAME' | translate }}</div>
+                        <div class="emp-ow-profile-text-subtitle">{{this.empDto.empLastName}}</div>
+
+                        <div class="emp-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.NUMBER' | translate }}</div>
+                        <div class="emp-ow-profile-text-subtitle">{{this.empDto.empMatricola}}</div>
+
+                        <div class="emp-ow-profile-text-title">{{ 'PLACEHOLDER.EMAIL' | translate }}</div>
+                        <div class="emp-ow-profile-text-subtitle">{{this.empDto.usrEmail}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Seconda colonna tabelle -->
+            <div class="col-xl-8 p-3">
+                <!-- Tabella wallet -->
+                <div class="row">
+                    <div class="emp-ow-content-wrap-tables" id="emp-ow-content-wrap-table1">
+                        <div class="emp-overview-table-div">
+                            <table class="table-responsive">
+                                <thead>
+                                    <tr class="emp-overview-table-head">
+                                        <th class="pl-4" scope="col" style="width: 15%;"><img
+                                                src="./assets/images/icons/wallet_icon.png"></th>
+                                        <th scope="col" style="color: #2d2e83; width: 25%;">
+                                            {{ 'OVERVIEW.WALLET.YOUR_WALLET' | translate }}</th>
+                                        <th scope="col" style="width: 12%;"></th>
+                                        <th colspan="2" scope="col" style="color: #2d2e83;">Totale:
+                                            {{ totalImport | currency: "EUR":"symbol":"":"it-IT" }}</th>
+                                        <th scope="col" style="width: 10%;">
+                                            <a routerLink="/employee/empDashboard/wallet"><img
+                                                    src="./assets/images/icons/profilo_go_icon.png"></a>
+                                        </th>
+                                    </tr>
+                                    <tr class="emp-overview-table-subhead">
+                                        <th class="pl-4" colspan="2" scope="col">
+                                            {{ 'OVERVIEW.WALLET.VOUCHER' | translate }}</th>
+                                        <th class="text-right" scope="col">{{ 'OVERVIEW.WALLET.AMOUNT' | translate }}
+                                        </th>
+                                        <th class="text-right" scope="col" style="width: 14%;">
+                                            {{ 'OVERVIEW.WALLET.EXPIRE' | translate }}</th>
+                                        <th class="text-right" scope="col" style="width: 12%;">Quantità</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <!-- Loading Table Row -->
+                                    <tr *ngIf="tableLoading">
+                                        <td class="text-center" colspan="6" style="height: 10rem;">
+                                            <div class="spinner-border text-primary" role="status"
+                                                style="height: 4rem; width: 4rem;"></div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Empty Table Row -->
+                                    <tr *ngIf="tableEmpty">
+                                        <td class="text-center" colspan="6" style="height: 10rem;">
+                                            <h1>{{ msgTableBody }}</h1>
+                                        </td>
+                                    </tr>
+
+                                    <tr
+                                        *ngFor="let voucher of empVouchers | paginate: { itemsPerPage: 4, currentPage: selectedPage }; let i = index ">
+                                        <!-- <th scope="row"></th> -->
+                                        <td class="pl-4" colspan="2" scope="row">
+                                            {{ validatorService.readableVoucherName(voucher.vchName) }}</td>
+                                        <td class="numericPagination">
+                                            {{ voucher.vchValue | currency: "EUR":"symbol":"":"it-IT" }}</td>
+                                        <td class="numericPagination">{{ voucher.vchEndDate | date:"dd/MM/y" }}</td>
+                                        <td class="numericPagination">{{ voucher.vchQuantity }}</td>
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="emp-ow-content-wrap-tables" id="emp-ow-content-wrap-table2">
+                        <div class="container-table100">
+                            <table class="table-responsive">
+                                <thead>
+                                    <tr class="emp-overview-table-head">
+                                        <th class="pl-4" scope="col" style="width: 15%;"><img
+                                                src="./assets/images/icons/storico_icon2.png"></th>
+                                        <th scope="col" style="color: #2d2e83; width: 60%;">
+                                            {{ 'OVERVIEW.TRANSACTION.TRANSACTION_HISTORY' | translate }}
+                                        </th>
+                                        <th scope="col" style="width: 5%;"></th>
+                                        <th scope="col" style="width: 10%;"></th>
+                                        <th scope="col" style="width: 10%;"><a
+                                                routerLink="/employee/empDashboard/transactions"><img
+                                                    src="./assets/images/icons/profilo_go_icon.png"></a></th>
+                                    </tr>
+                                    <tr class="emp-overview-table-subhead">
+                                        <th class="pr-3 text-right" scope="col">
+                                            {{ 'OVERVIEW.TRANSACTION.DATE' | translate }}</th>
+                                        <th class="pl-3" scope="col">
+                                            {{ 'OVERVIEW.TRANSACTION.DESCRIPTION' | translate }}</th>
+                                        <th class="pr-3 text-right" colspan="2" scope="col">
+                                            {{ 'OVERVIEW.WALLET.AMOUNT' | translate }}</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <!-- Loading Table Row -->
+                                    <tr *ngIf="transactionsTableLoading">
+                                        <td class="text-center" colspan="5" style="height: 10rem;">
+                                            <div class="mb-3 spinner-border text-primary" role="status"
+                                                style="height: 4rem; width: 4rem;"></div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Empty Table Row -->
+                                    <tr *ngIf="transactionsTableEmpty">
+                                        <td class="text-center" colspan="5" style="height: 10rem;">
+                                            <h1>{{ transactionsTableBodyMessage }}</h1>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let transaction of transactions">
+
+                                        <!-- Transaction Date -->
+                                        <td class="numericPagination px-0">
+                                            {{ transaction.trcDate }}
+                                        </td>
+
+                                        <!--  Transaction Type Full Description -->
+                                        <td class="pl-3" *ngIf="transaction.trcType === 'SPS'">
+                                            {{ getTrcTypeFullDescription(transaction.trcType) }}
+                                            {{transaction.usrIdAString}}
+                                        </td>
+
+                                        <!--  Transaction Type Full Description -->
+                                        <td class="pl-3" *ngIf="transaction.trcType === 'ALL'">
+                                            {{ getTrcTypeFullDescription(transaction.trcType) }}
+                                        </td>
+
+                                        <!-- Transaction Value -->
+                                        <td class="numericPagination pr-3" colspan="2">
+                                            {{ transaction.trcValue | currency: "EUR":"symbol":"":"it-IT" }}
+                                        </td>
+
+                                        <!-- Transaction Details Icon -->
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

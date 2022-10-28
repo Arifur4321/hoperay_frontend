@@ -1,0 +1,189 @@
+<section id="cpy-dashboard-header">
+    <img src="./assets/images/vouchain_dashboard_top_prova04.png" id="top-image-dashboard"
+        class="img-fluid float-right" />
+</section>
+<section id="cpy-overview">
+    <h1 class="text-center text-white" id="cpy-overview-title"><b>{{ 'OVERVIEW.EVIDENCE' | translate }}</b></h1>
+    <div class="container">
+        <div class="row">
+            <!-- Prima colonna profilo -->
+            <div class="col-xl-4 p-3">
+                <div class="row h-100">
+                    <div id="cpy-ow-wrap-profile" class="content-wrap my-auto text-center">
+                        <div class="row justify-content-end" id="cpy-ow-profile-go-btn">
+                            <a routerLink="/company/cpyDashboard/modifyProfile"><img
+                                    src="./assets/images/icons/profilo_go_icon.png"></a>
+                        </div>
+                        <div class="row">
+                            <img src="./assets/images/icons/profilo_icon.png" class="img-fluid mx-auto">
+                        </div>
+                        <div class="cpy-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.R_SOCIALE' | translate }}</div>
+                        <div class="cpy-ow-profile-text-subtitle">{{this.cpyDto.cpyRagioneSociale}}</div>
+
+                        <div class="cpy-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.PIVA' | translate }}</div>
+                        <div class="cpy-ow-profile-text-subtitle">{{this.cpyDto.cpyPartitaIva}}</div>
+
+                        <div class="cpy-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.CODFIS' | translate }}</div>
+                        <div class="cpy-ow-profile-text-subtitle">{{this.cpyDto.cpyCodiceFiscale}}</div>
+
+                        <div class="cpy-ow-profile-text-title">{{ 'OVERVIEW.PROFILE.PEC' | translate }}</div>
+                        <div class="cpy-ow-profile-text-subtitle">{{this.cpyDto.cpyPec}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Seconda colonna tabelle -->
+            <div class="col-xl-8 p-3">
+                <!-- Tabella wallet -->
+                <div class="row">
+                    <div class="cpy-ow-content-wrap-tables" id="cpy-ow-content-wrap-table1">
+                        <div class="cpy-overview-table-div">
+                            <table class="table-responsive">
+                                <thead>
+                                    <tr class="cpy-overview-table-head">
+                                        <th class="pl-4" scope="col" style="width: 15%;"><img
+                                                src="./assets/images/icons/wallet_icon.png"></th>
+                                        <th scope="col" style="color: #2d2e83; width: 25%;">
+                                            {{ 'OVERVIEW.WALLET.YOUR_WALLET' | translate }}</th>
+                                        <th scope="col" style="width: 12%;"></th>
+                                        <th colspan="2" scope="col" style="color: #2d2e83;"
+                                            *ngIf="!activeTableEmpty && !activeTableLoading">
+                                            {{ 'TABLES.GENERIC.TOTAL_IMPORT' | translate }} <span
+                                                class="numericPagination">{{ totalActiveImport | currency: "EUR":"symbol":"":"it-IT" }}</span>
+                                        </th>
+                                        <th colspan="2" scope="col" *ngIf="activeTableEmpty || activeTableLoading"></th>
+                                        <th scope="col" style="width: 10%;">
+                                            <a routerLink="/company/cpyDashboard/wallet"><img
+                                                    src="./assets/images/icons/profilo_go_icon.png"></a>
+                                        </th>
+                                    </tr>
+                                    <tr class="cpy-overview-table-subhead">
+                                        <th class="pl-4" colspan="2" scope="col">
+                                            {{ 'OVERVIEW.WALLET.VOUCHER' | translate }}</th>
+                                        <th class="text-right" scope="col">{{ 'OVERVIEW.WALLET.AMOUNT' | translate }}
+                                        </th>
+                                        <th class="text-right" scope="col" style="width: 14%;">
+                                            {{ 'OVERVIEW.WALLET.EXPIRE' | translate }}</th>
+                                        <th class="text-right" scope="col" style="width: 12%;">
+                                            {{ 'OVERVIEW.WALLET.QUANTITY' | translate }}</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <!-- Loading Table Row -->
+                                    <tr *ngIf="activeTableLoading">
+                                        <td class="text-center" colspan="6" style="height: 10rem;">
+                                            <div class="mb-3 spinner-border text-primary" role="status"
+                                                style="height: 4rem; width: 4rem;"></div>
+                                            <h3>{{ 'OVERVIEW.WALLET.LOADING' | translate }}</h3>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Empty Table Row -->
+                                    <tr *ngIf="activeTableEmpty">
+                                        <td class="text-center" colspan="6" style="height: 10rem;">
+                                            <h1>{{ activeTableBodyMessage }}</h1>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let voucher of activeVouchers">
+
+                                        <!-- <th scope="row"></th> -->
+                                        <td class="pl-4" colspan="2" scope="row">
+                                            {{ validatorService.readableVoucherName(voucher.vchName) }}</td>
+                                        <td class="numericPagination">
+                                            {{ voucher.vchValue | currency: "EUR":"symbol":"":"it-IT" }}</td>
+                                        <td class="numericPagination">{{ voucher.vchEndDate | date:"dd/MM/y" }}</td>
+                                        <td class="numericPagination">{{ voucher.vchQuantity }}</td>
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tabella Storico -->
+                <div class="row">
+                    <div class="cpy-ow-content-wrap-tables" id="cpy-ow-content-wrap-table2">
+                        <div class="cpy-overview-table-div">
+                            <table class="table-responsive">
+                                <thead>
+                                    <tr class="cpy-overview-table-head">
+                                        <th class="pl-4" scope="col" style="width: 15%;"><img
+                                                src="./assets/images/icons/storico_icon2.png"></th>
+                                        <th scope="col" style="color: #2d2e83; width: 60%;">
+                                            {{ 'OVERVIEW.TRANSACTION.TRANSACTION_HISTORY' | translate }}
+                                        </th>
+                                        <th scope="col" style="width: 5%;"></th>
+                                        <th scope="col" style="width: 10%;"></th>
+                                        <th scope="col" style="width: 10%;"><a
+                                                routerLink="/company/cpyDashboard/transactions"><img
+                                                    src="./assets/images/icons/profilo_go_icon.png"></a></th>
+                                    </tr>
+                                    <tr class="cpy-overview-table-subhead">
+                                        <th class="pr-3 text-right" scope="col">
+                                            {{ 'OVERVIEW.TRANSACTION.DATE' | translate }}</th>
+
+                                        <th class="pl-3" scope="col">
+                                            {{ 'OVERVIEW.TRANSACTION.DESCRIPTION' | translate }}</th>
+                                        <th class="pr-3 text-right" colspan="2" scope="col">
+                                            {{ 'OVERVIEW.WALLET.AMOUNT' | translate }}</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <!-- Loading Table Row -->
+                                    <tr *ngIf="transactionsTableLoading">
+                                        <td class="text-center" colspan="5" style="height: 10rem;">
+                                            <div class="mb-3 spinner-border text-primary" role="status"
+                                                style="height: 4rem; width: 4rem;"></div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Empty Table Row -->
+                                    <tr *ngIf="transactionsTableEmpty">
+                                        <td class="text-center" colspan="5" style="height: 10rem;">
+                                            <h1>{{ transactionsTableBodyMessage }}</h1>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let transaction of transactions">
+
+                                        <!-- Transaction Date -->
+                                        <td class="numericPagination pr-3">
+                                            {{ transaction.trcDate }}
+                                        </td>
+
+                                        <!--  Transaction Type Full Description -->
+                                        <td class="pl-3" *ngIf="transaction.trcType === 'ALL'">
+                                            {{ getTrcTypeFullDescription(transaction.trcType) }}
+                                            {{ transaction.usrIdAString }}
+                                        </td>
+
+                                        <!--  Transaction Type Full Description -->
+                                        <td class="pl-3" *ngIf="transaction.trcType === 'ACV'">
+                                            {{ getTrcTypeFullDescription(transaction.trcType) }}
+                                        </td>
+
+                                        <!-- Transaction Value -->
+                                        <td class="numericPagination pr-3" colspan="2">
+                                            {{ transaction.trcValue | currency: "EUR":"symbol":"":"it-IT" }}
+                                        </td>
+
+                                        <!-- Transaction Details Icon -->
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
